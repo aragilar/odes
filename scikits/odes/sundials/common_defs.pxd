@@ -9,6 +9,8 @@ ELIF SUNDIALS_FLOAT_TYPE == "double":
     ctypedef np.double_t DTYPE_t
 ELIF SUNDIALS_FLOAT_TYPE == "extended":
     ctypedef np.longdouble_t DTYPE_t
+ELIF SUNDIALS_FLOAT_TYPE == "quadruple":
+    ctypedef np.binary128_t DTYPE_t
 ELSE:
     # fall back to double
     ctypedef np.double_t DTYPE_t

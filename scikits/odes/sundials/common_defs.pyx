@@ -17,6 +17,8 @@ ELIF SUNDIALS_FLOAT_TYPE == "double":
     from numpy import double as DTYPE
 ELIF SUNDIALS_FLOAT_TYPE == "extended":
     from numpy import longdouble as DTYPE
+ELIF SUNDIALS_FLOAT_TYPE == "quadruple":
+    from numpy import binary128 as DTYPE
 ELSE:
     # fall back to double
     from numpy import double as DTYPE
