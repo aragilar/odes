@@ -73,6 +73,12 @@ def get_sundials_config_pxi(include_dirs, dist):
     ):
         SUNDIALS_FLOAT_TYPE = '"extended"'
         info("Found sundials built with extended precision.")
+    elif config_cmd.check_macro_true(
+        "SUNDIALS_QUADRUPLE_PRECISION", headers=[SUNDIALS_CONFIG_H],
+        include_dirs=include_dirs
+    ):
+        SUNDIALS_FLOAT_TYPE = '"quadruple"'
+        info("Found sundials built with quadruple precision.")
     else:
         # fall back to double
         SUNDIALS_FLOAT_TYPE = '"double"'
