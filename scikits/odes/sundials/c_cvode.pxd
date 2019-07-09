@@ -49,7 +49,7 @@ cdef extern from "cvode/cvode.h":
     ctypedef int (*CVEwtFn)(N_Vector y, N_Vector ewt, void *user_data)
     ctypedef void (*CVErrHandlerFn)(int error_code,
                                char *module, char *function,
-                               char *msg, void *user_data)
+                               char *msg, void *user_data) except *
 
     void *CVodeCreate(int lmm, int iter)
     int CVodeSetErrHandlerFn(void *cvode_mem, CVErrHandlerFn ehfun, void *eh_data)

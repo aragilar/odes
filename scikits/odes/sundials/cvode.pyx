@@ -657,12 +657,12 @@ def no_continue_fn(t, y, solver):
     return 1
 
 cdef class CV_ErrHandler:
-    cpdef evaluate(self,
+    cpdef void evaluate(self,
                    int error_code,
                    bytes module,
                    bytes function,
                    bytes msg,
-                   object user_data = None):
+                   object user_data = None) except *:
         """ format that error handling functions must match """
         pass
 
@@ -677,12 +677,12 @@ cdef class CV_WrapErrHandler(CV_ErrHandler):
         )
         self._err_handler = err_handler
 
-    cpdef evaluate(self,
+    cpdef void evaluate(self,
                    int error_code,
                    bytes module,
                    bytes function,
                    bytes msg,
-                   object user_data = None):
+                   object user_data = None) except *:
         if self.with_userdata == 1:
             self._err_handler(error_code, module, function, msg, user_data)
         else:
@@ -691,7 +691,7 @@ cdef class CV_WrapErrHandler(CV_ErrHandler):
 cdef void _cv_err_handler_fn(
     int error_code, const char *module, const char *function, char *msg,
     void *eh_data
-):
+) except *:
     """
     function with the signature of CVErrHandlerFn, that calls python error
     handler

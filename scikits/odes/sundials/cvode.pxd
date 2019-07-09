@@ -97,12 +97,12 @@ cdef class CV_ContinuationFunction:
                        CVODE solver)
 
 cdef class CV_ErrHandler:
-    cpdef evaluate(self,
+    cpdef void evaluate(self,
                    int error_code,
                    bytes module,
                    bytes function,
                    bytes msg,
-                   object user_data = *)
+                   object user_data = *) except *
 
 cdef class CV_WrapErrHandler(CV_ErrHandler):
     cpdef object _err_handler
