@@ -1,5 +1,5 @@
 # cython: embedsignature=True
-from cpython.exc cimport PyErr_CheckSignals
+from cpython.exc cimport PyErr_CheckSignals, PyErr_Occurred
 from collections import namedtuple
 from enum import IntEnum
 import inspect
@@ -1782,6 +1782,9 @@ cdef class CVODE:
 
         while True:
             flag = CVode(cv_mem, <realtype> t,  y, &t_out, CV_NORMAL)
+            if PyErr_Occurred() != NULL:
+                # This basically reraises the exception
+                return NULL
 
             nv_s2ndarray(y,  y_last)
 
